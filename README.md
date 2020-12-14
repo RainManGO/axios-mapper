@@ -12,10 +12,10 @@ Language: [English](README.md) | [中文简体](README-ZH.md)
     <img src="https://img.shields.io/node/v/axios-mapper" alt="npm">
   </a>
   <a href="https://www.npmjs.com/package/axios-mapper">
-    <img src=" https://img.shields.io/npm/dw/axios-mapper" alt="npm">
+    <img src="https://img.shields.io/npm/dw/axios-mapper" alt="npm">
   </a>
    <a href="https://www.npmjs.com/package/axios-mapper">
-    <img src=" https://img.shields.io/bundlephobia/minzip/axios-mapper" alt="npm">
+    <img src="https://img.shields.io/bundlephobia/minzip/axios-mapper" alt="npm">
   </a>
   <a href="https://github.com/RainManGO/axios-mapper/blob/main/LICENSE">
     <img src="https://img.shields.io/npm/l/axios-mapper" alt="License">
