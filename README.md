@@ -1,103 +1,114 @@
-# TSDX User Guide
+<p align="center">
+  <img width="192" src="https://img-blog.csdnimg.cn/20201214142404283.png" alt="axios mapper">
+</p>
 
-Congrats! You just saved yourself hours of work by bootstrapping this project with TSDX. Let’s get you oriented with what’s here and how to use it.
+<p align="center">
+  <a href="https://www.npmjs.com/package/axios-mapper">
+    <img src="https://img.shields.io/npm/v/axios-mapper?color=blue" alt="npm">
+  </a>
+   <a href="https://www.npmjs.com/package/axios-mapper">
+    <img src="https://img.shields.io/node/v/axios-mapper" alt="npm">
+  </a>
+  <a href="https://www.npmjs.com/package/axios-mapper">
+    <img src=" https://img.shields.io/npm/dw/axios-mapper" alt="npm">
+  </a>
+   <a href="https://www.npmjs.com/package/axios-mapper">
+    <img src=" https://img.shields.io/bundlephobia/minzip/axios-mapper" alt="npm">
+  </a>
+  <a href="https://github.com/RainManGO/axios-mapper/blob/main/LICENSE">
+    <img src="https://img.shields.io/npm/l/axios-mapper" alt="License">
+  </a>
+</p>
 
-> This TSDX setup is meant for developing libraries (not apps!) that can be published to NPM. If you’re looking to build a Node app, you could use `ts-node-dev`, plain `ts-node`, or simple `tsc`.
+axios-mapper can make  ts  project easy to transform model  🚀🚀 and   Prevent duplicate network requests
 
-> If you’re new to TypeScript, checkout [this handy cheatsheet](https://devhints.io/typescript)
 
-## Commands
+## Features
 
-TSDX scaffolds your new library inside `/src`.
+- [x] axios easy to request and  return data  auto  transform  model
+- [x] prevent duplicate network requests
 
-To run TSDX, use:
 
-```bash
-npm start # or yarn start
-```
-
-This builds to `/dist` and runs the project in watch mode so any edits you save inside `src` causes a rebuild to `/dist`.
-
-To do a one-off build, use `npm run build` or `yarn build`.
-
-To run tests, use `npm test` or `yarn test`.
-
-## Configuration
-
-Code quality is set up for you with `prettier`, `husky`, and `lint-staged`. Adjust the respective fields in `package.json` accordingly.
-
-### Jest
-
-Jest tests are set up to run with `npm test` or `yarn test`.
-
-### Bundle Analysis
-
-[`size-limit`](https://github.com/ai/size-limit) is set up to calculate the real cost of your library with `npm run size` and visualize the bundle with `npm run analyze`.
-
-#### Setup Files
-
-This is the folder structure we set up for you:
-
-```txt
-/src
-  index.tsx       # EDIT THIS
-/test
-  blah.test.tsx   # EDIT THIS
-.gitignore
-package.json
-README.md         # EDIT THIS
-tsconfig.json
-```
-
-### Rollup
-
-TSDX uses [Rollup](https://rollupjs.org) as a bundler and generates multiple rollup configs for various module formats and build settings. See [Optimizations](#optimizations) for details.
-
-### TypeScript
-
-`tsconfig.json` is set up to interpret `dom` and `esnext` types, as well as `react` for `jsx`. Adjust according to your needs.
-
-## Continuous Integration
-
-### GitHub Actions
-
-Two actions are added by default:
-
-- `main` which installs deps w/ cache, lints, tests, and builds on all pushes against a Node and OS matrix
-- `size` which comments cost comparison of your library on every pull request using [`size-limit`](https://github.com/ai/size-limit)
-
-## Optimizations
-
-Please see the main `tsdx` [optimizations docs](https://github.com/palmerhq/tsdx#optimizations). In particular, know that you can take advantage of development-only optimizations:
-
+## Usage
+&nbsp;
+1、base  setting
 ```js
-// ./types/index.d.ts
-declare var __DEV__: boolean;
+ import HttpClient,{HttpClientConfig} from "../src/index";
+ const config:HttpClientConfig = {
+    baseURL:'http://www.httpbin.org',
+    headers:{
+        token:'your token'
+    }    
+ }
+const https = new HttpClient(config)
+export default https
+```
 
-// inside your code...
-if (__DEV__) {
-  console.log('foo');
+2 、use  tool  get model
+
+vscode extension : [json2ts](https://marketplace.visualstudio.com/items?itemName=GregorBiswanger.json2ts)
+web：[http://json2ts.com](http://json2ts.com)
+
+```javascript
+// {
+//     "slideshow": {
+//       "author": "Yours Truly",
+//       "date": "date of publication",
+//       "slides": [
+//         {
+//           "title": "Wake up to WonderWidgets!",
+//           "type": "all"
+//         },
+//         {
+//           "items": [
+//             "Why <em>WonderWidgets</em> are great",
+//             "Who <em>buys</em> WonderWidgets"
+//           ],
+//           "title": "Overview",
+//           "type": "all"
+//         }
+//       ],
+//       "title": "Sample Slide Show"
+//     }
+//   }
+
+export interface Slide {
+	title: string;
+	type: string;
+}
+
+export interface Slideshow {
+	author: string;
+	date: string;
+	slides: Slide[];
+	title: string;
+}
+
+export interface RootObject {
+	slideshow: Slideshow;
 }
 ```
 
-You can also choose to install and use [invariant](https://github.com/palmerhq/tsdx#invariant) and [warning](https://github.com/palmerhq/tsdx#warning) functions.
+3、request
 
-## Module Formats
+```javascript
+import  https  from "./http";
+import { RootObject } from "./model";
 
-CJS, ESModules, and UMD module formats are supported.
+https.request<RootObject>('/json').then((res)=>{
+    console.log(res?.slideshow);
+})
+```
 
-The appropriate paths are configured in `package.json` and `dist/index.js` accordingly. Please report if any issues are found.
 
-## Named Exports
+### Dependency
 
-Per Palmer Group guidelines, [always use named exports.](https://github.com/palmerhq/typescript#exports) Code split inside your React app instead of your React library.
+ - axios
+ - qs
 
-## Including Styles
+### Scripts
 
-There are many ways to ship styles, including with CSS-in-JS. TSDX has no opinion on this, configure how you like.
+use  [tsdx](https://github.com/formium/tsdx)  to publish
 
-For vanilla CSS, you can include it at the root directory and add it to the `files` section in your `package.json`, so that it can be imported separately by your users and run through their bundler's loader.
-
-## Publishing to NPM
-
-We recommend using [np](https://github.com/sindresorhus/np).
+## License
+axios-mapper: Axios is open-sourced software licensed under the [MIT license](./LICENSE).
