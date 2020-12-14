@@ -22,7 +22,15 @@
 
 axios-mapper can make  ts  project easy to transform model  🚀🚀 and   Prevent duplicate network requests
 
+## Install
+```shell
+  npm install  axios-mapper
+```
+or
 
+```shell
+  yarn add axios-mapper
+```
 ## Features
 
 - [x] axios easy to request and  return data  auto  transform  model
