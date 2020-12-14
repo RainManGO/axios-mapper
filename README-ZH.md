@@ -22,9 +22,27 @@ Language: [English](README.md) | [中文简体](README-ZH.md)
   </a>
 </p>
 
-axios-mapper can make  ts  project easy to transform model  🚀🚀 and   Prevent duplicate network requests
 
-## Install
+>在移动端和后台进行数据操作的时候，我们往往会将网络请求抽象一个model层，便于维护和开发使用。
+
+
+前端用TS做项目，抽象model层是非常有必要。
+
+
+[axios-mapper](https://github.com/RainManGO/axios-mapper)是用来解决这个问题，让请求直接返回model。而且优化请求，防止过快点击重复请求。
+
+&nbsp;
+## 功能
+---
+- [x] 更简单的axios请求返回自动转成model
+- [x] 自定义间隔时间，防止重复快速点击
+
+&nbsp;
+
+&nbsp;
+## 安装
+---
+
 ```shell
   npm install  axios-mapper
 ```
@@ -33,15 +51,11 @@ or
 ```shell
   yarn add axios-mapper
 ```
-## Features
 
-- [x] axios easy to request and  return data  auto  transform  model
-- [x] prevent duplicate network requests
-
-
-## Usage
 &nbsp;
-1、base  setting
+## 简单使用
+---
+1、基础配置
 ```js
  import HttpClient,{HttpClientConfig} from "../src/index";
  const config:HttpClientConfig = {
@@ -54,7 +68,7 @@ const https = new HttpClient(config)
 export default https
 ```
 
-2 、use  tool  get model
+2 、自动化产生model
 
 vscode extension : [json2ts](https://marketplace.visualstudio.com/items?itemName=GregorBiswanger.json2ts)
 web：[http://json2ts.com](http://json2ts.com)
@@ -99,7 +113,7 @@ export interface RootObject {
 }
 ```
 
-3、request
+3、请求时获得转换
 
 ```javascript
 import  https  from "./http";
@@ -110,13 +124,29 @@ https.request<RootObject>('/json').then((res)=>{
 })
 ```
 
+&nbsp;
+## 全部配置
+---
 
-### Dependency
+配置基于AxiosRequestConfig类，扩展新增默认参数和间隔时间
+
+```javascript
+export interface HttpClientConfig extends AxiosRequestConfig {
+ //所有请求可以带默认参数
+  defaultParams?: RequestParams,
+  //click interval (点击间隔时间)
+  clickInterval?:number
+}
+```
+
+
+
+### 依赖
 
  - axios
  - qs
 
-### Scripts
+### 脚本
 
 use  [tsdx](https://github.com/formium/tsdx)  to publish
 
