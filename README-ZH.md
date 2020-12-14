@@ -33,7 +33,6 @@ Language: [English](README.md) | [中文简体](README-ZH.md)
 
 &nbsp;
 ## 功能
----
 - [x] 更简单的axios请求返回自动转成model
 - [x] 自定义间隔时间，防止重复快速点击
 
@@ -41,7 +40,6 @@ Language: [English](README.md) | [中文简体](README-ZH.md)
 
 &nbsp;
 ## 安装
----
 
 ```shell
   npm install  axios-mapper
@@ -54,7 +52,6 @@ or
 
 &nbsp;
 ## 简单使用
----
 1、基础配置
 ```js
  import HttpClient,{HttpClientConfig} from "../src/index";
@@ -126,7 +123,6 @@ https.request<RootObject>('/json').then((res)=>{
 
 &nbsp;
 ## 全部配置
----
 
 配置基于AxiosRequestConfig类，扩展新增默认参数和间隔时间
 
