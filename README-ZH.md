@@ -31,14 +31,11 @@ Language: [English](README.md) | [中文简体](README-ZH.md)
 
 [axios-mapper](https://github.com/RainManGO/axios-mapper)是用来解决这个问题，让请求直接返回model。而且优化请求，防止过快点击重复请求。
 
-&nbsp;
 ## 功能
 - [x] 更简单的axios请求返回自动转成model
 - [x] 自定义间隔时间，防止重复快速点击
 
-&nbsp;
 
-&nbsp;
 ## 安装
 
 ```shell
@@ -50,7 +47,6 @@ or
   yarn add axios-mapper
 ```
 
-&nbsp;
 ## 简单使用
 1、基础配置
 ```js
@@ -121,7 +117,6 @@ https.request<RootObject>('/json').then((res)=>{
 })
 ```
 
-&nbsp;
 ## 全部配置
 
 配置基于AxiosRequestConfig类，扩展新增默认参数和间隔时间
@@ -137,12 +132,12 @@ export interface HttpClientConfig extends AxiosRequestConfig {
 
 
 
-### 依赖
+## 依赖
 
  - axios
  - qs
 
-### 脚本
+## 脚本
 
 use  [tsdx](https://github.com/formium/tsdx)  to publish
 
