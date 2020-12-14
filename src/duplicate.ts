@@ -28,10 +28,18 @@ export default class DuplicateRequest {
    * @param {RequestParams} params
    * @return {*}
    */
-  static hashUrlAndParams(url: string, method: Method, params: RequestParams,interval:number = 1000) {
+  static hashUrlAndParams(
+    url: string,
+    method: Method,
+    params: RequestParams,
+    interval: number = 1000
+  ) {
     const identityCode = [url, method, qs.stringify(params)].join('&');
     const currentTime = Date.parse(new Date().toString());
-    if (currentTime - DuplicateRequest.lastRequestTimeStamp < interval && DuplicateRequest.lastIdentityCode === identityCode) {
+    if (
+      currentTime - DuplicateRequest.lastRequestTimeStamp < interval &&
+      DuplicateRequest.lastIdentityCode === identityCode
+    ) {
       return true;
     } else {
       DuplicateRequest.lastRequestTimeStamp = currentTime;
