@@ -3,14 +3,14 @@
  * @Author: ZY
  * @Date: 2020-12-11 09:40:18
  * @LastEditors: ZY
- * @LastEditTime: 2020-12-29 10:05:38
+ * @LastEditTime: 2020-12-29 11:07:48
  */
 import { RequestParams, Method, ContentType } from './type';
 import axios, { AxiosInstance,AxiosRequestConfig } from 'axios';
 import { Convert } from './json2Model';
 import DuplicateRequest from "./duplicate";
 
-export{RequestParams,Method,ContentType}
+export * from './type'
 
 export interface HttpClientConfig extends AxiosRequestConfig {
   defaultParams?: RequestParams,
