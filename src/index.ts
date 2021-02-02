@@ -3,19 +3,19 @@
  * @Author: ZY
  * @Date: 2020-12-11 09:40:18
  * @LastEditors: ZY
- * @LastEditTime: 2020-12-29 11:07:48
+ * @LastEditTime: 2021-02-02 17:10:42
  */
 import { RequestParams, Method, ContentType } from './type';
-import axios, { AxiosInstance,AxiosRequestConfig } from 'axios';
+import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
 import { Convert } from './json2Model';
-import DuplicateRequest from "./duplicate";
+import DuplicateRequest from './duplicate';
 
-export * from './type'
+export * from './type';
 
 export interface HttpClientConfig extends AxiosRequestConfig {
-  defaultParams?: RequestParams,
+  defaultParams?: RequestParams;
   //click interval (点击间隔时间)
-  clickInterval?:number
+  clickInterval?: number;
 }
 
 export default class HttpClient {
@@ -50,7 +50,11 @@ export default class HttpClient {
     );
     const { baseURL, headers } = options;
     headers['content-type'] = contentType;
-    const allParams = Object.assign({}, this._defaultConfig.defaultParams, params);
+    const allParams = Object.assign(
+      {},
+      this._defaultConfig.defaultParams,
+      params
+    );
 
     const requestConfig: HttpClientConfig = {
       url: `${baseURL}/${path}`,
@@ -58,20 +62,30 @@ export default class HttpClient {
       headers,
     };
 
-    if (Method.GET == method) {
-      requestConfig.params = allParams
+    if (contentType === ContentType.form) {
+      requestConfig.params = allParams;
     } else {
-      requestConfig.data = allParams
+      requestConfig.data = allParams;
     }
 
-    if (DuplicateRequest.hashUrlAndParams(requestConfig.url ?? "",method,allParams)) {
-       console.log('click quick');
-       return null
+    if (
+      DuplicateRequest.hashUrlAndParams(
+        requestConfig.url ?? '',
+        method,
+        allParams
+      )
+    ) {
+      console.log('click quick');
+      return null;
     }
+    console.log(requestConfig);
+    console.log(this._httpClient.request(requestConfig));
 
     return this._httpClient
       .request(requestConfig)
       .then(res => {
+        console.log(res);
+
         const data: string = JSON.stringify(res.data);
         if (res.status === 200) {
           return Convert.jsonToModel(data) as T;
