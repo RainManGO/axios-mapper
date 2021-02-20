@@ -3,7 +3,7 @@
  * @Author: ZY
  * @Date: 2020-12-11 09:40:18
  * @LastEditors: ZY
- * @LastEditTime: 2021-02-20 15:30:23
+ * @LastEditTime: 2021-02-20 16:27:18
  */
 import { RequestParams, Method, ContentType } from './type';
 import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
@@ -76,7 +76,7 @@ export default class HttpClient {
     if (contentType === ContentType.form) {
       requestConfig.params = allParams;
     } else {
-      requestConfig.data = allParams;
+      requestConfig.data = JSON.stringify(allParams);
     }
 
     return this._httpClient
