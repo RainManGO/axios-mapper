@@ -3,7 +3,7 @@
  * @Author: ZY
  * @Date: 2020-12-11 09:40:18
  * @LastEditors: ZY
- * @LastEditTime: 2021-02-02 17:10:42
+ * @LastEditTime: 2021-02-20 15:30:23
  */
 import { RequestParams, Method, ContentType } from './type';
 import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
@@ -62,12 +62,6 @@ export default class HttpClient {
       headers,
     };
 
-    if (contentType === ContentType.form) {
-      requestConfig.params = allParams;
-    } else {
-      requestConfig.data = allParams;
-    }
-
     if (
       DuplicateRequest.hashUrlAndParams(
         requestConfig.url ?? '',
@@ -78,8 +72,12 @@ export default class HttpClient {
       console.log('click quick');
       return null;
     }
-    console.log(requestConfig);
-    console.log(this._httpClient.request(requestConfig));
+
+    if (contentType === ContentType.form) {
+      requestConfig.params = allParams;
+    } else {
+      requestConfig.data = allParams;
+    }
 
     return this._httpClient
       .request(requestConfig)
