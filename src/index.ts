@@ -3,7 +3,7 @@
  * @Author: ZY
  * @Date: 2020-12-11 09:40:18
  * @LastEditors: ZY
- * @LastEditTime: 2021-02-20 16:27:18
+ * @LastEditTime: 2021-02-27 14:52:49
  */
 import { RequestParams, Method, ContentType } from './type';
 import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
@@ -19,11 +19,11 @@ export interface HttpClientConfig extends AxiosRequestConfig {
 }
 
 export default class HttpClient {
-  private _httpClient: AxiosInstance;
   private _defaultConfig: HttpClientConfig;
+  public httpClient: AxiosInstance;
 
   constructor(options: HttpClientConfig = {}) {
-    this._httpClient = axios.create(options);
+    this.httpClient = axios.create(options);
     this._defaultConfig = options;
   }
 
@@ -79,7 +79,7 @@ export default class HttpClient {
       requestConfig.data = JSON.stringify(allParams);
     }
 
-    return this._httpClient
+    return this.httpClient
       .request(requestConfig)
       .then(res => {
         console.log(res);
