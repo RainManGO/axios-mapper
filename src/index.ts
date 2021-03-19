@@ -85,7 +85,7 @@ export default class HttpClient {
         console.log(res);
 
         const data: string = JSON.stringify(res.data);
-        if (res.status === 200) {
+        if (res.status >= 200 && res.status<300) {
           return Convert.jsonToModel(data) as T;
         } else {
           return Promise.reject(data);
