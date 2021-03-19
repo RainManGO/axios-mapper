@@ -3,7 +3,7 @@
  * @Author: ZY
  * @Date: 2020-12-11 09:40:18
  * @LastEditors: ZY
- * @LastEditTime: 2021-02-27 14:52:49
+ * @LastEditTime: 2021-03-19 19:56:30
  */
 import { RequestParams, Method, ContentType } from './type';
 import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
@@ -48,7 +48,7 @@ export default class HttpClient {
       this._defaultConfig,
       optionsSource
     );
-    const { baseURL, headers } = options;
+    const { headers, clickInterval } = options;
     headers['content-type'] = contentType;
     const allParams = Object.assign(
       {},
@@ -57,7 +57,7 @@ export default class HttpClient {
     );
 
     const requestConfig: HttpClientConfig = {
-      url: `${baseURL}/${path}`,
+      url: `${path}`,
       method,
       headers,
     };
@@ -66,7 +66,8 @@ export default class HttpClient {
       DuplicateRequest.hashUrlAndParams(
         requestConfig.url ?? '',
         method,
-        allParams
+        allParams,
+        clickInterval
       )
     ) {
       console.log('click quick');
@@ -78,14 +79,13 @@ export default class HttpClient {
     } else {
       requestConfig.data = JSON.stringify(allParams);
     }
-
     return this.httpClient
       .request(requestConfig)
       .then(res => {
         console.log(res);
 
         const data: string = JSON.stringify(res.data);
-        if (res.status >= 200 && res.status<300) {
+        if (res.status >= 200 && res.status < 300) {
           return Convert.jsonToModel(data) as T;
         } else {
           return Promise.reject(data);
