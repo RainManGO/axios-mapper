@@ -3,7 +3,7 @@
  * @Author: ZY
  * @Date: 2020-12-11 13:42:27
  * @LastEditors: ZY
- * @LastEditTime: 2021-02-02 17:22:43
+ * @LastEditTime: 2021-05-12 14:39:05
  */
 
 import HttpClient, { HttpClientConfig } from '../src/index';
@@ -14,6 +14,26 @@ const config: HttpClientConfig = {
     token: '',
   },
 };
+
 const https = new HttpClient(config);
+
+
+// Add a request interceptor
+https.httpClient.interceptors.request.use(function (config) {
+  // Do something before request is sent
+  return config;
+}, function (error) {
+  // Do something with request error
+  return Promise.reject(error);
+});
+
+// Add a response interceptor
+https.httpClient.interceptors.response.use(function (response) {
+  // Do something with response data
+  return response;
+}, function (error) {
+  // Do something with response error
+  return Promise.reject(error);
+});
 
 export default https;
