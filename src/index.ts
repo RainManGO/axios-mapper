@@ -9,6 +9,7 @@ import { RequestParams, Method, ContentType } from './type';
 import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
 import { Convert } from './json2Model';
 import DuplicateRequest from './duplicate';
+import qs from 'qs';
 
 export * from './type';
 
@@ -74,10 +75,14 @@ export default class HttpClient {
       return null;
     }
 
-    if (contentType === ContentType.form) {
+    if (method === Method.GET) {
       requestConfig.params = allParams;
     } else {
-      requestConfig.data = JSON.stringify(allParams);
+      if (contentType === ContentType.form) {
+        requestConfig.data = qs.stringify(allParams);
+      } else {
+        requestConfig.data = JSON.stringify(allParams);
+      }
     }
     return this.httpClient
       .request(requestConfig)
