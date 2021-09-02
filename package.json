@@ -14,16 +14,19 @@
   "scripts": {
     "start": "tsdx watch",
     "build": "tsdx build",
+    "commit": "cz",
     "test": "tsdx test",
     "lint": "tsdx lint",
     "prepare": "tsdx build",
     "size": "size-limit",
-    "analyze": "size-limit --why"
+    "analyze": "size-limit --why",
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -w -r 0"
   },
   "peerDependencies": {},
   "husky": {
     "hooks": {
-      "pre-commit": "tsdx lint"
+      "pre-commit": "tsdx lint",
+      "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true"
     }
   },
   "prettier": {
@@ -57,6 +60,7 @@
   "repository": "RainManGO/axios-mapper",
   "devDependencies": {
     "@size-limit/preset-small-lib": "^4.9.1",
+    "commitizen": "^4.2.4",
     "husky": "^4.3.5",
     "size-limit": "^4.9.1",
     "ts-node": "^9.1.1",
@@ -68,5 +72,10 @@
     "@types/qs": "^6.9.5",
     "axios": "^0.21.0",
     "qs": "^6.9.4"
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
   }
 }

@@ -3,7 +3,7 @@
  * @Author: ZY
  * @Date: 2020-12-11 09:40:18
  * @LastEditors: ZY
- * @LastEditTime: 2021-03-19 19:56:30
+ * @LastEditTime: 2021-09-02 16:39:50
  */
 import { RequestParams, Method, ContentType } from './type';
 import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
@@ -20,12 +20,12 @@ export interface HttpClientConfig extends AxiosRequestConfig {
 }
 
 export default class HttpClient {
-  private _defaultConfig: HttpClientConfig;
+  public defaultConfig: HttpClientConfig;
   public httpClient: AxiosInstance;
 
   constructor(options: HttpClientConfig = {}) {
     this.httpClient = axios.create(options);
-    this._defaultConfig = options;
+    this.defaultConfig = options;
   }
 
   /**
@@ -46,14 +46,14 @@ export default class HttpClient {
   ) {
     const options: HttpClientConfig = Object.assign(
       {},
-      this._defaultConfig,
+      this.defaultConfig,
       optionsSource
     );
     const { headers, clickInterval } = options;
     headers['content-type'] = contentType;
     const allParams = Object.assign(
       {},
-      this._defaultConfig.defaultParams,
+      this.defaultConfig.defaultParams,
       params
     );
 
