@@ -1,5 +1,5 @@
 {
-  "version": "0.5.6",
+  "version": "0.5.7",
   "license": "MIT",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
@@ -20,7 +20,7 @@
     "prepare": "tsdx build",
     "size": "size-limit",
     "analyze": "size-limit --why",
-    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -w -r 0"
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s"
   },
   "peerDependencies": {},
   "husky": {
@@ -60,6 +60,7 @@
   "devDependencies": {
     "@size-limit/preset-small-lib": "^4.9.1",
     "commitizen": "^4.2.4",
+    "conventional-changelog-cli": "^2.1.1",
     "husky": "^4.3.5",
     "size-limit": "^4.9.1",
     "ts-node": "^9.1.1",
@@ -74,7 +75,7 @@
   },
   "config": {
     "commitizen": {
-      "path": "cz-conventional-changelog"
+      "path": "./node_modules/cz-conventional-changelog"
     }
   }
 }
