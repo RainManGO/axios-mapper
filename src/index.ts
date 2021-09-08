@@ -3,7 +3,7 @@
  * @Author: ZY
  * @Date: 2020-12-11 09:40:18
  * @LastEditors: ZY
- * @LastEditTime: 2021-09-02 16:39:50
+ * @LastEditTime: 2021-09-08 10:43:52
  */
 import { RequestParams, Method, ContentType } from './type';
 import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
@@ -15,6 +15,10 @@ export * from './type';
 
 export interface HttpClientConfig extends AxiosRequestConfig {
   defaultParams?: RequestParams;
+  //是否开启打印
+  log?: boolean;
+  //是否开启检查快速点击事件
+  checkQuickClick?: boolean;
   //click interval (点击间隔时间)
   clickInterval?: number;
 }
@@ -64,6 +68,7 @@ export default class HttpClient {
     };
 
     if (
+      options.checkQuickClick === true &&
       DuplicateRequest.hashUrlAndParams(
         requestConfig.url ?? '',
         method,
@@ -71,7 +76,7 @@ export default class HttpClient {
         clickInterval
       )
     ) {
-      console.log('click quick');
+      options.log && console.log('click quick');
       return null;
     }
 
@@ -87,8 +92,7 @@ export default class HttpClient {
     return this.httpClient
       .request(requestConfig)
       .then(res => {
-        console.log(res);
-
+        options.log && console.log(res);
         const data: string = JSON.stringify(res.data);
         if (res.status >= 200 && res.status < 300) {
           return Convert.jsonToModel(data) as T;
