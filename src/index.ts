@@ -3,7 +3,7 @@
  * @Author: ZY
  * @Date: 2020-12-11 09:40:18
  * @LastEditors: ZY
- * @LastEditTime: 2021-09-08 10:43:52
+ * @LastEditTime: 2021-09-10 16:07:43
  */
 import { RequestParams, Method, ContentType } from './type';
 import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
@@ -54,7 +54,7 @@ export default class HttpClient {
       optionsSource
     );
     const { headers, clickInterval } = options;
-    headers['content-type'] = contentType;
+    headers['Content-type'] = contentType;
     const allParams = Object.assign(
       {},
       this.defaultConfig.defaultParams,
