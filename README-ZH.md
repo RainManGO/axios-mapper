@@ -31,6 +31,8 @@ Language: [English](README.md) | [中文简体](README-ZH.md)
 
 [axios-mapper](https://github.com/RainManGO/axios-mapper)是用来解决这个问题，让请求直接返回model。而且优化请求，防止过快点击重复请求。
 
+注意点：axios-mapper 的初衷是为了解决模型转换的问题，是axios 上层的简单封装，如果上传文件或者一些特殊处理可以直接使用axios 
+
 ## 功能
 - [x] 更简单的axios请求返回自动转成model
 - [x] 自定义间隔时间，防止重复快速点击
